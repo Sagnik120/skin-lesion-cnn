@@ -18,7 +18,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--model",      type=str, required=True)
     parser.add_argument("--checkpoint", type=str, required=True)
-    parser.add_argument("--data-csv",   type=str, default="data/raw/HAM10000_metadata.csv")
+    parser.add_argument("--data-csv",   type=str, default="data/raw/GroundTruth.csv")
     parser.add_argument("--images-dir", type=str, default="data/raw/images")
     parser.add_argument("--image-size", type=int, default=224)
     parser.add_argument("--n-images",   type=int, default=8,  help="Number of Grad-CAM examples")
@@ -27,12 +27,7 @@ def parse_args():
 
 def main():
     args   = parse_args()
-    if torch.backends.mps.is_available():
-        device = "mps"
-    elif torch.cuda.is_available():
-        device = "cuda"
-    else:
-        device = "cpu"
+    device = "cuda" if torch.cuda.is_available() else "cpu"
 
     ckpt  = torch.load(args.checkpoint, map_location=device)
     model = build_model(args.model, ckpt.get("config", {"num_classes": 7, "dropout": 0.3, "pretrained": False}))

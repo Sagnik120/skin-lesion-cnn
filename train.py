@@ -31,7 +31,7 @@ def parse_args():
     parser.add_argument("--config", type=str, required=True,
                         help="Path to YAML config file")
     parser.add_argument("--data-csv", type=str,
-                        default="data/raw/HAM10000_metadata.csv")
+                        default="data/raw/GroundTruth.csv")
     parser.add_argument("--images-dir", type=str,
                         default="data/raw/images")
     parser.add_argument("--seed", type=int, default=42)
@@ -52,7 +52,7 @@ def main():
     flat_config  = {**model_cfg, **train_cfg, **log_cfg}
 
     torch.manual_seed(args.seed)
-    device = "mps" if torch.cuda.is_available() else "cpu"
+    device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"Device: {device}")
     print(f"Model : {args.model}")
     print(f"Config: {args.config}\n")

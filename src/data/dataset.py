@@ -120,6 +120,27 @@ class SkinLesionDataset(Dataset):
 
 # ── Data splitting ─────────────────────────────────────────────────────────────
 
+def load_and_normalize_csv(metadata_csv: str | Path) -> pd.DataFrame:
+    """
+    Load either format of the HAM10000 CSV:
+      - Old format: columns [image_id, dx]
+      - New format: columns [image, MEL, NV, BCC, AKIEC, BKL, DF, VASC] (one-hot)
+
+    Always returns a DataFrame with [image_id, dx] columns.
+    """
+    df = pd.read_csv(metadata_csv)
+
+    # New one-hot format
+    if "image" in df.columns and "MEL" in df.columns:
+        one_hot_cols = ["MEL", "NV", "BCC", "AKIEC", "BKL", "DF", "VASC"]
+        dx_series = df[one_hot_cols].idxmax(axis=1).str.lower()
+        df = pd.DataFrame({"image_id": df["image"], "dx": dx_series})
+    elif "image_id" not in df.columns:
+        raise ValueError(f"Unrecognized CSV format. Columns: {list(df.columns)}")
+
+    return df
+
+
 def make_splits(
     metadata_csv: str | Path,
     val_ratio: float = 0.15,
@@ -132,9 +153,9 @@ def make_splits(
     Returns:
         (train_df, val_df, test_df) — each with [image_id, dx] columns.
     """
-    df = pd.read_csv(metadata_csv)[["image_id", "dx"]]
+    df = load_and_normalize_csv(metadata_csv)
 
-    # Remove duplicate image_ids (same lesion photographed multiple times)
+    # Remove duplicate image_ids
     df = df.drop_duplicates(subset="image_id")
 
     train_val, test = train_test_split(

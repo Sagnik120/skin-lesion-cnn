@@ -15,7 +15,7 @@ def main():
     print(f"Device: {device}")
 
     _, _, test_loader = build_loaders(
-        "data/raw/HAM10000_metadata.csv",
+        "data/raw/GroundTruth.csv",
         "data/raw/images",
         image_size=224,
         batch_size=32,

@@ -22,7 +22,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--model",      type=str, required=True)
     parser.add_argument("--checkpoint", type=str, required=True)
-    parser.add_argument("--data-csv",   type=str, default="data/raw/HAM10000_metadata.csv")
+    parser.add_argument("--data-csv",   type=str, default="data/raw/GroundTruth.csv")
     parser.add_argument("--images-dir", type=str, default="data/raw/images")
     parser.add_argument("--image-size", type=int, default=224)
     parser.add_argument("--batch-size", type=int, default=32)
@@ -31,12 +31,7 @@ def parse_args():
 
 def main():
     args   = parse_args()
-    if torch.backends.mps.is_available():
-        device = "mps"
-    elif torch.cuda.is_available():
-        device = "cuda"
-    else:
-        device = "cpu"
+    device = "cuda" if torch.cuda.is_available() else "cpu"
 
     print(f"Loading checkpoint: {args.checkpoint}")
     ckpt  = torch.load(args.checkpoint, map_location=device)

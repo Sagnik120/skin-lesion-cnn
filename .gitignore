@@ -1,0 +1,39 @@
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+
+# Data - never commit raw images
+data/raw/
+data/processed/
+
+# Model checkpoints (large files)
+results/checkpoints/*.pth
+results/checkpoints/*.pt
+
+# MLflow artifacts
+mlruns/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+*.ipynb
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Kaggle credentials
+.kaggle/
+
+# Logs
+*.log
+logs/

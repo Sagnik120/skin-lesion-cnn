@@ -45,7 +45,7 @@ IMAGENET_STD  = [0.229, 0.224, 0.225]
 
 def get_train_transform(image_size: int = 224):
     return A.Compose([
-        A.RandomResizedCrop(height=image_size, width=image_size, scale=(0.8, 1.0)),
+        A.RandomResizedCrop(size=(image_size, image_size), scale=(0.8, 1.0)),
         A.HorizontalFlip(p=0.5),
         A.VerticalFlip(p=0.5),
         A.Rotate(limit=30, p=0.7),
@@ -53,7 +53,7 @@ def get_train_transform(image_size: int = 224):
         A.ShiftScaleRotate(shift_limit=0.05, scale_limit=0.1, rotate_limit=15, p=0.4),
         A.OneOf([
             A.GaussianBlur(blur_limit=3, p=0.5),
-            A.GaussNoise(var_limit=(10, 50), p=0.5),
+            A.GaussNoise(var_limit=(0.02, 0.1), p=0.5),
         ], p=0.3),
         A.Normalize(mean=IMAGENET_MEAN, std=IMAGENET_STD),
         ToTensorV2(),

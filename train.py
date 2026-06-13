@@ -52,7 +52,12 @@ def main():
     flat_config  = {**model_cfg, **train_cfg, **log_cfg}
 
     torch.manual_seed(args.seed)
-    device = "cuda" if torch.cuda.is_available() else "cpu"
+    if torch.backends.mps.is_available():
+        device = "mps"
+    elif torch.cuda.is_available():
+        device = "cuda"
+    else:
+        device = "cpu"
     print(f"Device: {device}")
     print(f"Model : {args.model}")
     print(f"Config: {args.config}\n")

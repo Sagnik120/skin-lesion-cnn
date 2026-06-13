@@ -112,7 +112,7 @@ python explain.py --model efficientnet --checkpoint results/checkpoints/best_eff
 
 ## 📦 Dataset
 - **HAM10000** — Human Against Machine with 10000 training images
-- Available on [Kaggle](https://www.kaggle.com/datasets/kmader/skin-lesion-analysis-toward-melanoma-detection)
+- Available on [Kaggle](https://www.kaggle.com/datasets/surajghuwalewala/ham1000-segmentation-and-classification)
 - 10,015 dermoscopic images, 7 classes, metadata CSV included
 
 ---

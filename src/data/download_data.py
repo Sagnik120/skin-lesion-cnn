@@ -16,8 +16,8 @@ from pathlib import Path
 
 
 DATA_DIR = Path("data/raw")
-KAGGLE_DATASET = "kmader/skin-lesion-analysis-toward-melanoma-detection"
-
+#KAGGLE_DATASET = "kmader/skin-lesion-analysis-toward-melanoma-detection"
+KAGGLE_DATASET = "surajghuwalewala/ham1000-segmentation-and-classification"
 
 def download():
     DATA_DIR.mkdir(parents=True, exist_ok=True)

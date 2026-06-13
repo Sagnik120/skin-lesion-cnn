@@ -1,0 +1,43 @@
+# ResNet-50 Training Configuration
+model:
+  name: resnet
+  backbone: resnet50
+  pretrained: true
+  num_classes: 7
+  dropout: 0.5
+  freeze_backbone_epochs: 3
+
+data:
+  image_size: 224
+  batch_size: 32
+  num_workers: 4
+  augmentation:
+    random_horizontal_flip: true
+    random_vertical_flip: true
+    random_rotation: 30
+    color_jitter:
+      brightness: 0.2
+      contrast: 0.2
+      saturation: 0.2
+    random_resized_crop:
+      scale: [0.8, 1.0]
+
+training:
+  epochs: 50
+  optimizer: adamw
+  learning_rate: 1.0e-4
+  weight_decay: 1.0e-4
+  scheduler: cosine_warmup
+  warmup_epochs: 5
+  min_lr: 1.0e-6
+  loss: focal
+  focal_gamma: 2.0
+  early_stopping_patience: 10
+  early_stopping_metric: val_f1_macro
+
+logging:
+  experiment_name: skin_lesion_cnn
+  run_name: resnet50
+  log_every_n_steps: 10
+  save_best_only: true
+  checkpoint_dir: results/checkpoints/

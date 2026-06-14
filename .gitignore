@@ -41,3 +41,4 @@ mlflow.db
 mlruns/
 mlflow.db
 mlruns/
+results/checkpoints/*.pth

@@ -104,6 +104,23 @@ python explain.py --model efficientnet --checkpoint results/checkpoints/best_eff
 
 ---
 
+
+## 📊 Results
+
+### EfficientNet-B3 (Completed)
+| Metric | Score |
+|--------|-------|
+| Accuracy | 82.0% |
+| Macro F1 | 0.778 |
+| Weighted F1 | 0.830 |
+| ROC-AUC | 0.969 |
+
+### ResNet-50 — training in progress...
+### DenseNet-121 — pending
+### MobileNet-V3 — pending
+
+---
+
 ## 🧠 Explainability
 - **Grad-CAM**: Highlights pixels the model focused on
 - **LIME**: Superpixel-level feature attribution

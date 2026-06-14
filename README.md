@@ -105,26 +105,15 @@ python explain.py --model efficientnet --checkpoint results/checkpoints/best_eff
 ---
 
 
-## 📊 Results
-
-### EfficientNet-B3 ✅
+### DenseNet-121 ✅
 | Metric | Score |
 |--------|-------|
-| Accuracy | 82.0% |
-| Macro F1 | 0.778 |
-| Weighted F1 | 0.830 |
-| ROC-AUC | 0.969 |
+| Accuracy | 71.5% |
+| Macro F1 | 0.725 |
+| Weighted F1 | 0.743 |
+| ROC-AUC | 0.968 |
 
-### ResNet-50 ✅
-| Metric | Score |
-|--------|-------|
-| Accuracy | 65.4% |
-| Macro F1 | 0.691 |
-| Weighted F1 | 0.688 |
-| ROC-AUC | 0.952 |
-
-### DenseNet-121 — training in progress...
-### MobileNet-V3 — pending
+### MobileNet-V3 — training in progress...
 
 ---
 

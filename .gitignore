@@ -37,3 +37,7 @@ Thumbs.db
 # Logs
 *.log
 logs/
+mlflow.db
+mlruns/
+mlflow.db
+mlruns/

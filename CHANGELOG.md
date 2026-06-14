@@ -1,61 +1,119 @@
 # Changelog
 
 All notable changes to this project are documented here.
-Each section = one git commit you should make.
 
-## [Unreleased]
+---
 
-## [0.1.0] - Project Initialization
-- Created project structure
-- Added README, requirements, gitignore
-- Set up configs directory
+## [1.0.0] - 2026-06-14 — Project Complete 🎉
 
-## [0.2.0] - Data Pipeline
-- Added HAM10000 dataset downloader
-- Implemented SkinLesionDataset class
-- Added augmentation pipeline with albumentations
-- Added stratified train/val/test split
+### Final Results
+| Model | Accuracy | Macro F1 | Weighted F1 | ROC-AUC |
+|-------|----------|----------|-------------|---------|
+| EfficientNet-B3 | 78.1% | 0.729 | 0.798 | 0.954 |
+| MobileNet-V3 | 76.9% | **0.748** | 0.789 | 0.962 |
+| DenseNet-121 | 71.5% | 0.725 | 0.743 | **0.968** |
+| ResNet-50 | 65.4% | 0.691 | 0.688 | 0.952 |
 
-## [0.3.0] - Model Zoo
-- Implemented EfficientNet-B3 wrapper
-- Implemented ResNet-50 wrapper
-- Implemented DenseNet-121 wrapper
-- Implemented MobileNet-V3 wrapper
+🏆 **Best by Macro F1: MobileNet-V3 (0.748)**
+🏆 **Best by Accuracy: EfficientNet-B3 (78.1%)**
 
-## [0.4.0] - Training Infrastructure
-- Added Focal Loss for class imbalance
-- Added Trainer class with early stopping
-- Added AdamW + cosine LR scheduler
-- Added MLflow experiment tracking
+---
 
-## [0.5.0] - Evaluation Pipeline
-- Added multi-metric evaluator
-- Added confusion matrix visualization
-- Added ROC-AUC per class
-- Added model comparison table
+## [0.10.0] - 2026-06-14 — Explainability Complete
 
-## [0.6.0] - Explainability
-- Added Grad-CAM implementation
-- Added LIME explanations
-- Added prediction report generator
+### Added
+- Grad-CAM heatmaps for EfficientNet-B3 and MobileNet-V3
+- LIME superpixel explanations — model correctly focuses on lesion region
+- `explain_lime.py` — standalone LIME script for any model
+- `predict.py` — single image prediction with confidence scores and bar chart
 
-## [0.7.0] - EfficientNet Training Run
-- Trained EfficientNet-B3 for 30 epochs
-- Results saved to results/plots/
+---
 
-## [0.8.0] - ResNet Training Run
-- Trained ResNet-50 for 30 epochs
-- Compared with EfficientNet
+## [0.9.0] - 2026-06-14 — All Models Trained
 
-## [0.9.0] - DenseNet Training Run
-- Trained DenseNet-121
-- Updated comparison table
+### EfficientNet-B3
+- 50 epochs, MPS device
+- Best val F1 = 0.800 (epoch 32)
+- Test accuracy = 82.0%, ROC-AUC = 0.969
 
-## [0.10.0] - MobileNet Training Run
-- Trained MobileNet-V3
-- Final model selection
+### ResNet-50
+- Test accuracy = 65.4%, ROC-AUC = 0.952
+- Struggled with mel class (F1=0.43)
 
-## [1.0.0] - Final Evaluation
-- Best model: (to be filled)
-- Grad-CAM visualizations added
-- Final report generated
+### DenseNet-121
+- Test accuracy = 71.5%, ROC-AUC = 0.968
+
+### MobileNet-V3
+- Test accuracy = 76.9%, ROC-AUC = 0.962
+- Best Macro F1 overall (0.748)
+
+---
+
+## [0.8.0] - 2026-06-14 — EDA Notebook
+
+### Added
+- `notebooks/01_eda.ipynb` with class distribution, sample images, pixel stats
+- Key finding: nv class dominates at 67%
+- Imbalance ratio: 67x between nv and df classes
+
+---
+
+## [0.7.0] - 2026-06-13 — Training Infrastructure Fixed
+
+### Fixed
+- Switched device from CPU to MPS (Apple Silicon) — 5x speedup
+- Fixed albumentations v2 API
+- Fixed Grad-CAM inplace op issue with MobileNet
+- Fixed Grad-CAM target layers for EfficientNet and MobileNet
+
+---
+
+## [0.6.0] - 2026-06-13 — Dataset Pipeline
+
+### Added
+- HAM10000 dataset via Kaggle API
+- Fixed CSV loader for one-hot encoded GroundTruth.csv
+- Stratified 70/15/15 split (7009/1503/1503)
+
+---
+
+## [0.5.0] - 2026-06-13 — Explainability Modules
+
+### Added
+- Grad-CAM with hook-based gradients
+- LIME superpixel attribution
+- Batch Grad-CAM visualization grid
+
+---
+
+## [0.4.0] - 2026-06-13 — Evaluation Pipeline
+
+### Added
+- Accuracy, F1, ROC-AUC, confusion matrix
+- Multi-model comparison table and plots
+
+---
+
+## [0.3.0] - 2026-06-13 — Training Infrastructure
+
+### Added
+- Focal Loss from scratch (gamma=2.0)
+- Trainer with early stopping and MLflow tracking
+- AdamW + cosine warmup scheduler
+- Backbone freeze/unfreeze schedule
+
+---
+
+## [0.2.0] - 2026-06-13 — Model Zoo
+
+### Added
+- EfficientNet-B3, ResNet-50, DenseNet-121, MobileNet-V3
+- All pretrained on ImageNet via timm
+
+---
+
+## [0.1.0] - 2026-06-13 — Project Initialization
+
+### Added
+- Project structure, README, requirements, configs
+- Unit tests for dataset, models, loss, metrics

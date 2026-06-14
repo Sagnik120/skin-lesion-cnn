@@ -149,7 +149,7 @@ python explain.py --model efficientnet --checkpoint results/checkpoints/best_eff
 | DenseNet-121 | 71.5% | 0.725 | 0.743 | 0.968 |
 | ResNet-50 | 65.4% | 0.691 | 0.688 | 0.952 |
 
-> 🥇 **Winner: EfficientNet-B3** — best across all metrics with ROC-AUC of 0.969
+> 🥇 **Winner by Macro F1: MobileNet-V3** (0.748) | **Winner by Accuracy: EfficientNet-B3** (78.1%)
 
 ---
 

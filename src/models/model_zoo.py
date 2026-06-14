@@ -79,7 +79,7 @@ class EfficientNetModel(SkinLesionModel):
 
     def get_last_conv_layer(self):
         """Used by Grad-CAM to hook the last convolutional layer."""
-        return self.backbone.conv_head
+        return self.backbone.blocks[-1][-1].conv
 
 
 # ── ResNet-50 ─────────────────────────────────────────────────────────────────
@@ -127,7 +127,7 @@ class MobileNetModel(SkinLesionModel):
         self.model_name = "MobileNet-V3"
 
     def get_last_conv_layer(self):
-        return self.backbone.conv_head
+        return self.backbone.blocks[-1][-1].conv
 
 
 # ── Factory ───────────────────────────────────────────────────────────────────

@@ -23,7 +23,11 @@ comprehensive evaluation pipeline — then explain **why** the model made each p
 | `vasc` | Vascular lesions | Blood vessel related |
 
 ---
+## 🏗️ Architecture
 
+![Architecture](docs/architecture.png)
+
+---
 ## 📂 Project Structure
 
 ```
